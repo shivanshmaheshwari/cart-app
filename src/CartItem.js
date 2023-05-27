@@ -8,13 +8,48 @@ class CartItem extends React.Component {
       title: "Mobile Phone",
       quantity: 1,
       img: "",
-    }
-    // this.increaseQuantity = this.increaseQuantity.bind(this);
+    };
   }
- 
+
+  //   increase quantity function
   increaseQuantity = () => {
-    console.log("this.state",this.state);
-  }
+    // this.state.quantity += 1;
+    // console.log("this.state",this.state);
+
+    // set state form 1 1st way to set state by giveing it an object
+    // to be used when the state is not dependent on the previous state
+    // object form
+
+    // this.setState({
+    //   quantity: this.state.quantity + 1,
+    // });
+
+    // form no 2  to be used when the next state is dependent on the previous state
+    // function form
+
+    this.setState((prevState) => {
+      return {
+        quantity: prevState.quantity + 1,
+      };
+    });
+  };
+
+  //   decrease quantity function
+  decreaseQuantity = () => {
+    if (this.state.quantity == 1) {
+      alert("quantity cannot be zero");
+    } else {
+      this.setState((prevState) => {
+        return {
+          quantity: prevState.quantity - 1,
+        };
+      });
+    }
+  };
+
+delete = () => {
+    
+}
   render() {
     const { price, title, quantity } = this.state;
     return (
@@ -39,11 +74,13 @@ class CartItem extends React.Component {
               alt="decrease"
               className="action-icons"
               src={require("../src/images/minus.png")}
+              onClick={this.decreaseQuantity}
             />
             <img
               alt="delete"
               className="action-icons"
               src={require("../src/images/delete.png")}
+              onClick={this.delete}
             />
           </div>
         </div>
