@@ -54,6 +54,13 @@ handleDecreaseQuantity = (product) => {
   });
 }
 
+handleDeleteProduct = (id) => {
+  const { products } = this.state;
+  const items = products.filter((item) => item.id !== id);  
+  this.setState({
+    products: items,
+  })
+}
   render() {
     const { products } = this.state;
     return (
@@ -62,8 +69,9 @@ handleDecreaseQuantity = (product) => {
           return <CartItem 
           product={product} 
           key={product.id}
-          onIncreaseQuantity={this.handleIncreaseQuantity} 
-          onDecreaseQuantity={this.handleDecreaseQuantity}
+          onIncreaseQuantity = {this.handleIncreaseQuantity} 
+          onDecreaseQuantity = {this.handleDecreaseQuantity}
+          onDeleteProduct = {this.handleDeleteProduct}
           />;
         })}
       </div>
