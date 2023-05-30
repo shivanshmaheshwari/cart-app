@@ -1,57 +1,9 @@
 import React from "react";
 
 class CartItem extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      price: 999,
-      title: "Mobile Phone",
-      quantity: 1,
-      img: "",
-    };
-  }
-
-  //   increase quantity function
-  increaseQuantity = () => {
-    // this.state.quantity += 1;
-    // console.log("this.state",this.state);
-
-    // set state form 1 1st way to set state by giveing it an object
-    // to be used when the state is not dependent on the previous state
-    // object form
-
-    // this.setState({
-    //   quantity: this.state.quantity + 1,
-    // });
-
-    // form no 2  to be used when the next state is dependent on the previous state
-    // function form
-
-    this.setState((prevState) => {
-      return {
-        quantity: prevState.quantity + 1,
-      };
-    });
-  };
-
-  //   decrease quantity function
-  decreaseQuantity = () => {
-    if (this.state.quantity == 1) {
-      alert("quantity cannot be zero");
-    } else {
-      this.setState((prevState) => {
-        return {
-          quantity: prevState.quantity - 1,
-        };
-      });
-    }
-  };
-
-delete = () => {
-    
-}
   render() {
-    const { price, title, quantity } = this.state;
+    console.log('this.props',this.props)
+    const { price, title, quantity } = this.props.product;
     return (
       <div className="cart-item">
         <div className="left-block">
@@ -68,13 +20,13 @@ delete = () => {
               alt="increase"
               className="action-icons"
               src={require("../src/images/plus.png")}
-              onClick={this.increaseQuantity}
+              onClick={() => this.props.onIncreaseQuantity(this.props.product)}
             />
             <img
               alt="decrease"
               className="action-icons"
               src={require("../src/images/minus.png")}
-              onClick={this.decreaseQuantity}
+              onClick={() => this.props.onDecreaseQuantity(this.props.product)}
             />
             <img
               alt="delete"
